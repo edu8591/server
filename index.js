@@ -6,8 +6,6 @@ const app = express();
 app.get("/", (req, res) => {
   res.send({ hi: "there" });
 });
-app.get("/home", (req, res) => {
-  res.send({ home: "this is the home route" });
-});
 
-app.listen(5000);
+const PORT = process.env.PORT;
+app.listen(PORT);
