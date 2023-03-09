@@ -8,10 +8,15 @@ module.exports = (app) => {
     })
   );
 
-  app.get("/auth/google/callback", passport.authenticate("google"));
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("google"),
+    (request, response) => response.redirect("/surveys")
+  );
 
   app.get("/api/logout", (request, response) => {
     request.logout();
+    response.send(request.user);
   });
 
   app.get("/api/current_user", (request, response) => {
