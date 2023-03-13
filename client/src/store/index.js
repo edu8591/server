@@ -5,6 +5,7 @@ import { setupListeners } from "@reduxjs/toolkit/dist/query";
 
 export const store = configureStore({
   reducer: {
+    auth: authReducer,
     [authApi.reducerPath]: authApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -14,3 +15,4 @@ export const store = configureStore({
 setupListeners(store.dispatch);
 
 export { useGetCurrentUserQuery } from "./apis/authApi";
+export { logout } from "./slices/authSlice";

@@ -1,10 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { authApi } from "../apis/authApi";
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: {},
+  initialState: { id: "", googleId: "" },
   reducers: {
     google: (state, action) => {},
+    logout: (state, { payload }) => {
+      console.log(payload);
+      state.id = "";
+      state.googleId = "";
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      authApi.endpoints.getCurrentUser.matchFulfilled,
+      (state, { payload }) => {
+        state.id = payload._id;
+        state.googleId = payload.googleId;
+      }
+    );
   },
 });
+
+export const { logout } = authSlice.actions;
 export const authReducer = authSlice.reducer;

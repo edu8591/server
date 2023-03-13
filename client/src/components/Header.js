@@ -1,29 +1,36 @@
 import React from "react";
 import { useGetCurrentUserQuery } from "../store";
+import { authApi } from "../store/apis/authApi";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../store";
 
 function Header() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth);
+  console.log(user);
   const { data, error, isLoading } = useGetCurrentUserQuery();
-  if (error) {
-    console.log(error.error);
-  }
-  if (isLoading) {
-    console.log("is loading");
-  }
-  if (data) {
-    console.log(data);
-  }
-
+  const handleClick = () => {
+    dispatch(logout());
+  };
   return (
-    <nav>
-      <div className="nav-wrapper">
-        <a className="left brand-logo">Emaily</a>
-        <ul className="right">
-          <li>
-            <a>Login with google</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <>
+      <nav>
+        <div className="nav-wrapper">
+          <a className="left brand-logo">Emaily</a>
+          <ul className="right">
+            <li>
+              <a href="/auth/google">Login with google</a>
+            </li>
+            <li>
+              <a href="/api/logout" onClick={handleClick}>
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      {error ? error.error : isLoading ? "loading..." : data ? data._id : ""}
+    </>
   );
 }
 
