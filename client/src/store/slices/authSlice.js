@@ -16,8 +16,7 @@ const authSlice = createSlice({
     builder.addMatcher(
       authApi.endpoints.getCurrentUser.matchFulfilled,
       (state, { payload }) => {
-        state.id = payload._id;
-        state.googleId = payload.googleId;
+        state = { ...payload };
       }
     );
   },

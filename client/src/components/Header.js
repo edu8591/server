@@ -1,22 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useGetCurrentUserQuery } from "../store";
-import { authApi } from "../store/apis/authApi";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store";
 
 function Header() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
-  console.log(user);
+
   const { data, error, isLoading } = useGetCurrentUserQuery();
   const handleClick = () => {
     dispatch(logout());
   };
+  console.log(user);
   return (
     <>
       <nav>
         <div className="nav-wrapper">
-          <a className="left brand-logo">Emaily</a>
+          <a href="/" className="left brand-logo">
+            Emaily
+          </a>
           <ul className="right">
             <li>
               <a href="/auth/google">Login with google</a>
