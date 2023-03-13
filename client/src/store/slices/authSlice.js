@@ -3,11 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const authSlice = createSlice({
   name: "auth",
   initialState: {},
-  reducer: {
-    google: (state) => {
-      console.log(state);
-    },
+  reducers: {
+    google: (state, action) => {},
   },
 });
-
 export const authReducer = authSlice.reducer;
