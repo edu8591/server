@@ -5,9 +5,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState: { id: "", googleId: "" },
   reducers: {
-    google: (state, action) => {},
     logout: (state, { payload }) => {
-      console.log(payload);
       state.id = "";
       state.googleId = "";
     },
@@ -16,7 +14,10 @@ const authSlice = createSlice({
     builder.addMatcher(
       authApi.endpoints.getCurrentUser.matchFulfilled,
       (state, { payload }) => {
-        state = { ...payload };
+        if (payload !== null) {
+          state.id = payload._id;
+          state.googleId = payload.googleId;
+        }
       }
     );
   },

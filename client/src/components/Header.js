@@ -1,17 +1,9 @@
-import React, { useEffect } from "react";
-import { useGetCurrentUserQuery } from "../store";
-import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../store";
+import React from "react";
+import { useSelector } from "react-redux";
 
 function Header() {
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
-
-  const { data, error, isLoading } = useGetCurrentUserQuery();
-  const handleClick = () => {
-    dispatch(logout());
-  };
-  console.log(user);
+  console.log("user: ", user);
   return (
     <>
       <nav>
@@ -24,14 +16,11 @@ function Header() {
               <a href="/auth/google">Login with google</a>
             </li>
             <li>
-              <a href="/api/logout" onClick={handleClick}>
-                Logout
-              </a>
+              <a href="/api/logout">Logout</a>
             </li>
           </ul>
         </div>
       </nav>
-      {error ? error.error : isLoading ? "loading..." : data ? data._id : ""}
     </>
   );
 }

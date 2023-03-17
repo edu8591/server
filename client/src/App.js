@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
+import { useGetCurrentUserQuery } from "./store";
 import Header from "./components/Header";
 import "materialize-css/dist/css/materialize.min.css";
 
@@ -8,6 +9,7 @@ const SurveryNew = () => <h2>SurveryNew</h2>;
 const Landing = () => <h2>Landing</h2>;
 
 function App() {
+  useGetCurrentUserQuery();
   return (
     <div className="container">
       <BrowserRouter>
