@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Header() {
   const user = useSelector(({ auth }) => auth.user);
@@ -26,9 +27,12 @@ function Header() {
     <>
       <nav>
         <div className="nav-wrapper">
-          <a href="/" className="left brand-logo">
+          {/* <a href={user ? "/surveys" : "/"} className="left brand-logo">
             Emaily
-          </a>
+          </a> */}
+          <Link to={user ? "/surveys" : "/"} className="left brand-logo">
+            Emaily
+          </Link>
           <ul className="right">{renderContent()}</ul>
         </div>
       </nav>
